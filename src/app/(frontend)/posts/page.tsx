@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
+// import { client } from "@/sanity/lib/client";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
 
