@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+.container {
+  @apply container mx-auto grid grid-cols-1 gap-6 p-12;
+}
