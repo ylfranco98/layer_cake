@@ -5,15 +5,17 @@ import { PublishedAt } from "@/components/PublishedAt";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
+import { DeleteButton } from "./DeleteButton";
 
 export function PostCard(props: POSTS_QUERYResult[0]) {
-  const { title, author, mainImage, publishedAt, categories } = props;
+  const { _id, title, author, mainImage, publishedAt, categories } = props;
 
   return (
     <Link className="group" href={`/posts/${props.slug!.current}`}>
       <article className="flex flex-col-reverse gap-4 md:grid md:grid-cols-12 md:gap-0">
         <div className="md:col-span-2 md:pt-1">
           <Categories categories={categories} />
+          <DeleteButton _id={_id} />
         </div>
         <div className="md:col-span-5 md:w-full">
           <h2 className="text-2xl text-pretty font-semibold text-slate-800 group-hover:text-pink-600 transition-colors relative">

@@ -22,6 +22,14 @@ export function Header() {
           <li>
             <Link
               className="hover:text-pink-500 transition-colors"
+              href="/posts/create"
+            >
+              Create
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="hover:text-pink-500 transition-colors"
               href="/studio"
             >
               Sanity Studio
