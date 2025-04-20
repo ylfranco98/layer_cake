@@ -1,3 +1,4 @@
+"use server";
 import { writeClient } from "./lib/write-client";
 
 export const deletePost = async (id: string) => {
