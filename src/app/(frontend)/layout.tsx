@@ -7,7 +7,7 @@ export default function FrontendLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="bg-white min-h-screen">
+    <section className="min-h-screen">
       <Header />
       {children}
       <SanityLive />
