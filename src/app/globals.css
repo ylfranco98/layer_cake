@@ -1,16 +1,19 @@
 @import "tailwindcss";
+/* @import "tw-animate-css"; */
+
+/* @custom-variant dark (&:is(.dark *)); */
 /* @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *)); */
 @plugin "@tailwindcss/typography";
+@plugin "tailwind-scrollbar";
 
 @theme {
   /* Colors */
   --color-bg: #f2d6d0;
-  --color-bg-shadow: #c2aba6;
   --color-primary: #ce7c77;
-  --color-primary-100: #f5e5e4;
-  --color-primary-border: #e2b0ad;
+  --color-primary-bg: #f5e5e4;
+  --color-primary-light: #e3b2ad; /* --color-primary-border: #e2b0ad; */
   /*  --color-primary-100: #ffe8f0;
   --color-primary: #ee2b69;
   --color-secondary: #fbe843;
@@ -21,7 +24,6 @@
   /* --color-black-300: #7d8087; */
   /* --color-white-100: #f7f7f7;
   --color-white: #ffffff; * */
-
   /* Font Families */
   --font-laobrige: laobrige;
 }
@@ -43,13 +45,25 @@ body {
 }
 
 .scrolled {
-  @apply bg-primary-100 shadow-2xl;
+  @apply bg-primary-bg shadow-2xl;
 }
 
 .menuItems {
-  @apply hover:text-primary transition-colors;
+  @apply text-black/60 hover:text-primary transition duration-300 text-xl font-semibold;
 }
-
+.menuItemsDisplay {
+  @apply xl:flex hidden;
+}
+.sidebarMenu {
+  @apply flex-col gap-4  mt-8;
+}
+/* .menuItems:hover .arrowDown {
+  @apply animate-[rotate_.3s_ease-in-out_forwards];
+  /* transition: rotate(180) 0.3s ease-in-out; */
+/*} */
+/* .menuItems:not(:hover) .arrowDown {
+  @apply animate-[rotate_0.3s_ease-in-out_reverse];
+} */
 .active {
   @apply text-primary;
 }
@@ -62,20 +76,101 @@ body {
   @apply text-black/60;
 }
 
-.card {
-  @apply border-transparent shadow-xl bg-primary-100;
-  /* transform: scale(1);
+/* .card { */
+/* @apply border-transparent shadow-xl bg-primary-100; */
+/* transform: scale(1);
   transition: transform 0.3s ease-in-out; */
+/* } */
+/* .card:hover { */
+/* transform: scale(1.05); */
+/* animation: scaleRotate 0.3s ease-in-out forwards; Adjust duration & repetition */
+/* } */
+.card {
+  @apply border-transparent shadow-xl bg-primary-bg xl:px-0 sm:px-8;
+  animation-fill-mode: forwards; /* Holds the final state */
+  transition: transform 0.3s ease-in-out;
 }
+
 .card:hover {
-  /* transform: scale(1.05); */
-  animation: scaleRotate 0.1s linear forwards; /* Adjust duration & repetition */
+  animation: scaleRotate 0.3s linear forwards; /* Applies forward animation */
 }
 
+.card:not(:hover) {
+  animation: scaleRotateReverse 0.3s linear forwards; /* Reverse when unhovered */
+}
+.card .title {
+  @apply text-lg text-primary font-laobrige text-center;
+}
 .card .content {
-  @apply flex justify-center;
+  @apply flex flex-col justify-center gap-5;
+}
+.card .img-content {
+  @apply w-full flex justify-center;
+}
+.card .img {
+  @apply rounded-xl object-cover xl:w-[350px] sm:w-full xl:h-auto sm:h-[350px];
+}
+.card .description {
+  @apply text-lg mt-2 text-black/60 text-center;
+}
+.card .button {
+  @apply text-xl rounded-full p-2 font-bold bg-primary text-primary-bg;
 }
 
+/* Reset animation when button inside card is hovered */
+/* .card:hover:not(:has(.button:hover)) {
+  animation: scaleRotate 0.3s linear forwards;
+} */
+
+.card:has(.button:hover),
+.card:hover:not(:hover) {
+  /* animation: none; Stops animation when button is hovered
+  transform: scale(1) rotate(0deg); /* Resets to original size & position */
+  /* transition: transform 0.3s ease-in-out;  */
+  animation: scaleRotateReverse 0.3s ease-out forwards;
+}
+.fadeIn {
+  animation: fadeIn 0.5s forwards;
+  /* animation-delay: 0.3s; */
+  display: flex;
+}
+/* Slide In */
+.animateSlide {
+  animation: slide 1s ease-in-out forwards;
+}
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translate(0, 20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  /* 50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+  } */
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
 @keyframes scaleRotate {
   0% {
     transform: scale(1) rotate(0deg);
@@ -84,7 +179,23 @@ body {
     transform: scale(1.05) rotate(3deg);
   }
 }
-
+@keyframes scaleRotateReverse {
+  0% {
+    transform: scale(1.05) rotate(3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+.object-center {
+  object-position: center;
+} /* Default */
+/* .sm\:object-left {
+  object-position: left;
+} /* Left on small screens */
+/* .md\:object-right {
+  object-position: right;
+} Right on medium screens */
 /*@theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -190,6 +301,48 @@ body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+} */
+/* 
+:root {
+  --sidebar: hsl(0 0% 98%);
+  --sidebar-foreground: hsl(240 5.3% 26.1%);
+  --sidebar-primary: hsl(240 5.9% 10%);
+  --sidebar-primary-foreground: hsl(0 0% 98%);
+  --sidebar-accent: hsl(240 4.8% 95.9%);
+  --sidebar-accent-foreground: hsl(240 5.9% 10%);
+  --sidebar-border: hsl(220 13% 91%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+}
+
+.dark {
+  --sidebar: hsl(240 5.9% 10%);
+  --sidebar-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-primary: hsl(224.3 76.3% 48%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(240 3.7% 15.9%);
+  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-border: hsl(240 3.7% 15.9%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+}
+
+@theme inline {
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {
