@@ -26,30 +26,20 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import TooltipComponent from "../TooltipComponent";
 
 const OrderByButton = () => {
   const [framework, setFramework] = useState("date");
 
   return (
     <DropdownMenu>
-      <TooltipProvider delayDuration={0}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="icon-button">
-                <ArrowUpNarrowWide
-                  className="icon"
-                  size={16}
-                  aria-hidden="true"
-                />
-              </Button>
-            </DropdownMenuTrigger>
-          </TooltipTrigger>
-          <TooltipContent className="dark p-4 text-md bg-primary-light font-semibold text-black/60">
-            Sort By
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <TooltipComponent text="Sort By">
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" className="icon-button">
+            <ArrowUpNarrowWide className="icon" size={16} aria-hidden="true" />
+          </Button>
+        </DropdownMenuTrigger>
+      </TooltipComponent>
       <DropdownMenuContent className="dropdown-content">
         <DropdownMenuRadioGroup value={framework} onValueChange={setFramework}>
           <DropdownMenuRadioItem value="title" className="dropdown-item">

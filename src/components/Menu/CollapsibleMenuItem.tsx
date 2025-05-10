@@ -41,7 +41,7 @@ const CollapsibleMenuItem = ({
           <CollapsibleTrigger>
             {/* className="group-data-[state=open]/collapsible:text-primay" */}
             <SidebarMenuItem
-              className={`w-full hover:text-primary transition duration-300 text-xl font-semibold flex justify-start cursor-pointer ${isCollapsed ? "text-primary" : "text-black/60"}`}
+              className={`w-full hover:text-primary transition duration-300 text-xl font-semibold flex justify-start cursor-pointer ${isCollapsed ? "text-primary" : "text-text"}`}
               onClick={(event) => setCollapsed((prev) => !prev)}
             >
               {children}

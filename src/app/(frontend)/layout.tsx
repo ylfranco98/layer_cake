@@ -1,11 +1,11 @@
-import { Header } from "@/components/Header/Header";
+import { Header } from "@/components/Menu/Header";
 import { SanityLive } from "@/sanity/lib/live";
 import {
   SidebarProvider,
   // SidebarTrigger,
   // useSidebar,
 } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/Header/AppSidebar";
+import { AppSidebar } from "@/components/Menu/AppSidebar";
 import { GlobalStateProvider } from "@/contexts/GlobalStateContext";
 import { MenuItem } from "@/lib/types";
 

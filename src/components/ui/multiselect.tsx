@@ -450,7 +450,7 @@ const MultipleSelector = ({
               <div
                 key={option.value}
                 className={cn(
-                  "animate-fadeIn bg-background text-black/60 hover:bg-background relative inline-flex h-7 cursor-default items-center rounded-md border-1 border-primary-light ps-2 pe-7 pl-2 text-xs font-medium transition-all disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 data-fixed:pe-2 bg-pink-bg",
+                  "animate-fadeIn bg-background text-text hover:bg-background relative inline-flex h-7 cursor-default items-center rounded-md border-1 border-primary-light ps-2 pe-7 pl-2 text-xs font-medium transition-all disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 data-fixed:pe-2 bg-pink-bg",
                   badgeClassName
                 )}
                 data-fixed={option.fixed}

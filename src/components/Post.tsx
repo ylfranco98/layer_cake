@@ -1,9 +1,9 @@
-import { Author } from "@/components/Author";
-import { Categories } from "@/components/Categories";
+import { Author } from "@/components/PostsPage/Author";
+import { Categories } from "@/components/PostsPage/Categories";
 import { components } from "@/sanity/portableTextComponents";
 import { PortableText } from "next-sanity";
 import { POST_QUERYResult } from "@/sanity/types";
-import { PublishedAt } from "@/components/PublishedAt";
+import { PublishedAt } from "@/components/PostsPage/PublishedAt";
 import { Title } from "@/components/Title";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";

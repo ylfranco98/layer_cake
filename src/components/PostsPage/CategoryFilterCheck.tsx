@@ -20,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import TooltipComponent from "../TooltipComponent";
 
 type Checked = DropdownMenuItemProps[];
 
@@ -42,27 +43,15 @@ const CategoryFilterCheck = () => {
 
   return (
     <DropdownMenu>
-      <TooltipProvider delayDuration={0}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="icon-button">
-                <SlidersHorizontal
-                  className="icon"
-                  // size={20}
-                  aria-hidden="true"
-                />
-              </Button>
-            </DropdownMenuTrigger>
-          </TooltipTrigger>
-          <TooltipContent className="dark p-4 text-md bg-primary-light font-semibold text-black/60">
-            Filter by Categories
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <TooltipComponent text="Filter by Categories">
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" className="icon-button">
+            <SlidersHorizontal className="icon" aria-hidden="true" />
+          </Button>
+        </DropdownMenuTrigger>
+      </TooltipComponent>
       <DropdownMenuContent className="dropdown-content">
         {categories.map((category) => {
-          // console.log("Category Icon:", category.icon);
           return (
             <DropdownMenuCheckboxItem
               className="dropdown-item"

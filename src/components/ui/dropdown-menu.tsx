@@ -155,7 +155,7 @@ function DropdownMenuCheckboxItem({
       }
       {...props}
     >
-      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center border-black/60 border-2 p-2 bg-pink-bg rounded-md">
+      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center border-text border-2 p-2 bg-pink-bg rounded-md">
         <DropdownMenuPrimitive.ItemIndicator>
           <CheckIcon className="size-3" />
         </DropdownMenuPrimitive.ItemIndicator>
@@ -194,7 +194,7 @@ function DropdownMenuRadioItem({
       }
       {...props}
     >
-      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center border-black/60 border-2 p-2 bg-pink-bg rounded-full">
+      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center border-text border-2 p-2 bg-pink-bg rounded-full">
         <DropdownMenuPrimitive.ItemIndicator>
           <CircleIcon className="size-2 fill-current text-primary" />
         </DropdownMenuPrimitive.ItemIndicator>
