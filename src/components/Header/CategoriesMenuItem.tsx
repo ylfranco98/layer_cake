@@ -9,28 +9,29 @@ import Link from "next/link";
 import { ChevronDownIcon, SquareLibrary } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 import CollapsibleMenuItem from "./CollapsibleMenuItem";
-import { CollapsibleMenuType } from "@/lib/types";
+import { Category, CollapsibleMenuType } from "@/lib/types";
 import * as LucideIcons from "lucide-react";
+// import { Category } from "@/sanity/types";
+import { useGlobalState } from "@/contexts/GlobalStateContext";
 
 const CategoriesMenuItem = ({ scrolled }: { scrolled: boolean }) => {
   const { open, toggleSidebar } = useSidebar();
   const [components, setComponents] = useState<CollapsibleMenuType[]>([]);
-  const [categories, setCategories] = useState([]);
+  const { categories } = useGlobalState();
 
-  const fetchCategories = async () => {
-    const response = await fetch("/api/categories");
-    const data = await response.json();
-    setCategories(data);
-  };
+  // const fetchCategories = async () => {
+  //   const response = await fetch("/api/categories");
+  //   const data = await response.json();
+  //   setCategories(data);
+  // };
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+  // useEffect(() => {
+  //   fetchCategories();
+  // }, []);
 
   useEffect(() => {
     const formattedCategories: CollapsibleMenuType[] = categories.map(
-      (category: { title: string; description: string; icon: string }) => {
-        console.log(category.icon);
+      (category: Category) => {
         return {
           title: category.title ?? "Untitled",
           description: category.description ?? "No description available",
@@ -60,7 +61,9 @@ const CategoriesMenuItem = ({ scrolled }: { scrolled: boolean }) => {
         className={` menuItemsDisplay bg-transparent shadow-none hover:bg-transparent !p-0`}
         asChild
       >
-        <div className="menuItems flex items-center gap-1 p-0">
+        <div
+          className={`menuItems flex items-center gap-1 p-0 ${scrolled ? "scrolledItems" : ""}`}
+        >
           Categories
           <ChevronDownIcon
             className="relative top-[1px] ml-1 size-5 transition-transform transition-colors duration-300 group-data-[state=open]:rotate-180"

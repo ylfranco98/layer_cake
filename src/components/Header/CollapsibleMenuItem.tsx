@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
-import { useMenuItems } from "@/contexts/MenuContext";
+import { useGlobalState } from "@/contexts/GlobalStateContext";
 import { CollapsibleMenuType } from "@/lib/types";
 
 const CollapsibleMenuItem = ({
@@ -28,12 +28,12 @@ const CollapsibleMenuItem = ({
   children: ReactNode;
 }) => {
   const { open, toggleSidebar } = useSidebar();
-  const { active, setActiveMenuItem } = useMenuItems();
+  const { active, setActive } = useGlobalState();
   const [isCollapsed, setCollapsed] = useState(false);
   let animationTime = 0;
   return (
     <Collapsible
-      className={`group/collapsible p-2 mx-2 mb-2 rounded-xl transition-colors ${isCollapsed ? "bg-bg  shadow-[0px_5px_10px_rgba(0,0,0,0.2)]" : "bg-transparent  shadow-none"}`}
+      className={`group/collapsible p-2 mx-2 mb-2 rounded-xl transition-colors ${isCollapsed ? "bg-pink-bg  shadow-[0px_5px_10px_rgba(0,0,0,0.2)]" : "bg-transparent  shadow-none"}`}
     >
       {/* className=" w-full" */}
       <SidebarGroup>
@@ -86,7 +86,7 @@ const CollapsibleMenuItem = ({
                       //   className={`menuItems w-full p-2 py-6 m-2 ${item.name === active ? "active" : ""}`}
                       href={`${item.href}`}
                       onClick={(event) => {
-                        setActiveMenuItem(item.title ? item.title : "");
+                        setActive(item.title ? item.title : "");
                         toggleSidebar();
                       }}
                     >

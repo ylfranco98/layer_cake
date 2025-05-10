@@ -54,7 +54,7 @@ const UserMenuItem = ({ scrolled }: { scrolled: boolean }) => {
     <ContentNavigationMenuItem scrolled={scrolled} components={components}>
       <Button
         size="icon"
-        className={`menuItems rounded-full hover:bg-primary-bg menuItemsDisplay ${scrolled ? "bg-bg hover:bg-primary-light" : "bg-primary-light"}`}
+        className={`menuItems rounded-full hover:bg-white-bg menuItemsDisplay ${scrolled ? "bg-pink-bg hover:bg-primary-light" : "bg-primary-light"}`}
         asChild
       >
         <UserRound className="size-5 p-2" />

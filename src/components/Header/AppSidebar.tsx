@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/sidebar";
 import { CloseIcon } from "@sanity/icons";
 import Link from "next/link";
-import { MenuProvider, useMenuItems } from "@/contexts/MenuContext";
+import { useGlobalState } from "@/contexts/GlobalStateContext";
 import CategoriesMenuItem from "@/components/Header/CategoriesMenuItem";
 import UserMenuItem from "./UserMenuItem";
 import {
@@ -37,7 +37,7 @@ import { MenuItem } from "@/lib/types";
 
 export function AppSidebar({ menuItems }: { menuItems: MenuItem[] }) {
   const { open, toggleSidebar } = useSidebar();
-  const { active, setActiveMenuItem } = useMenuItems();
+  const { active, setActive } = useGlobalState();
   const iconMap = {
     Home: House,
     Recipes: CookingPot,
@@ -53,7 +53,7 @@ export function AppSidebar({ menuItems }: { menuItems: MenuItem[] }) {
         {" "}
       </div>
       <Sidebar
-        className={`bg-primary-bg w-[50%] lg:w-[30%] fixed top-0 right-0 h-full transition-transform duration-300 ${
+        className={`bg-white-bg w-[50%] lg:w-[30%] fixed top-0 right-0 h-full transition-transform duration-300 ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -87,7 +87,7 @@ export function AppSidebar({ menuItems }: { menuItems: MenuItem[] }) {
                           //   className={`menuItems w-full p-2 py-6 m-2 ${item.name === active ? "active" : ""}`}
                           href={item.path}
                           onClick={(event) => {
-                            setActiveMenuItem(item.name);
+                            setActive(item.name);
                             toggleSidebar();
                           }}
                         >

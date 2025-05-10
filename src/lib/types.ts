@@ -12,3 +12,9 @@ export type CollapsibleMenuType = {
   description: string | undefined;
   icon: React.ComponentType<any> | undefined;
 };
+
+export type Category = {
+  title: string;
+  description: string;
+  icon: string;
+};

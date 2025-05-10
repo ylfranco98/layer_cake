@@ -12,6 +12,17 @@ const laobrige = localFont({
   ],
   variable: "--font-laobrige",
 });
+const font = localFont({
+  src: [
+    {
+      path: "./fonts/Penpoint.otf",
+
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-font",
+});
 
 export default function RootLayout({
   children,

@@ -67,7 +67,7 @@ export default async function Page() {
       </div>
       <div>
         <div className="my-50 flex xl:px-[10%] px-[20%] xl:flex-row flex-col gap-10">
-          <Card className="card">
+          <Card className="card cardHome">
             <CardHeader>
               <CardTitle className="title">Discover Recipes</CardTitle>
             </CardHeader>
@@ -118,7 +118,7 @@ export default async function Page() {
               </Link>
             </CardFooter>
           </Card>
-          <Card className="card">
+          <Card className="card cardHome">
             <CardHeader>
               <CardTitle className="title">Expert Baking Tips</CardTitle>
             </CardHeader>
@@ -150,7 +150,7 @@ export default async function Page() {
               </Link>
             </CardFooter>
           </Card>
-          <Card className="card">
+          <Card className="card cardHome">
             <CardHeader>
               <CardTitle className="title">Inspiring Blog Articles</CardTitle>
             </CardHeader>
@@ -199,7 +199,7 @@ export default async function Page() {
             ingredients into sweet masterpieces! Ready to whip up something
             amazing?
           </p>
-          <Button className="text-4xl rounded-full p-8 bg-primary text-primary-bg mt-10">
+          <Button className="text-4xl rounded-full p-8 bg-primary text-white-bg mt-10">
             Let’s get baking!
           </Button>
         </div>

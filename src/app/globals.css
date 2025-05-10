@@ -9,27 +9,22 @@
 @plugin "tailwind-scrollbar";
 
 @theme {
+  /* Define breakpoints for responsive design */
+  --breakpoint-xxl: 88rem;
+
   /* Colors */
-  --color-bg: #f2d6d0;
+  --color-pink-bg: #f2d6d0;
   --color-primary: #ce7c77;
-  --color-primary-bg: #f5e5e4;
+  --color-white-bg: #f5e5e4;
   --color-primary-light: #e3b2ad; /* --color-primary-border: #e2b0ad; */
-  /*  --color-primary-100: #ffe8f0;
-  --color-primary: #ee2b69;
-  --color-secondary: #fbe843;
-  --color-black-100: #333333;
-  --color-black-200: #141413;
-  --color-black-300: #7d8087;
-  --color-black: #000000;
-  /* --color-black-300: #7d8087; */
-  /* --color-white-100: #f7f7f7;
-  --color-white: #ffffff; * */
+
   /* Font Families */
   --font-laobrige: laobrige;
+  --font-font: font;
 }
 
 body {
-  @apply bg-bg;
+  @apply bg-pink-bg;
 }
 
 .logo {
@@ -37,19 +32,23 @@ body {
 }
 
 .container {
-  @apply container mx-auto grid grid-cols-1 gap-6 p-12 mt-[250px] w-[80%];
+  @apply p-12 mt-[250px] mx-[10%];
+  /* // w-[80%];  grid grid-cols-1 gap-6 container*/
 }
 
 .header {
-  @apply bg-bg fixed top-0 right-0 left-0 w-full flex items-center justify-between px-[10%] pt-16 pb-8 z-8;
+  @apply bg-pink-bg fixed top-0 right-0 left-0 w-full flex items-center justify-between px-[10%] pt-16 pb-8 z-8;
 }
 
 .scrolled {
-  @apply bg-primary-bg shadow-2xl;
+  @apply bg-white-bg shadow-2xl;
 }
 
 .menuItems {
   @apply text-black/60 hover:text-primary transition duration-300 text-xl font-semibold;
+}
+.scrolledItems {
+  @apply text-primary hover:text-black/60;
 }
 .menuItemsDisplay {
   @apply xl:flex hidden;
@@ -86,20 +85,22 @@ body {
 /* animation: scaleRotate 0.3s ease-in-out forwards; Adjust duration & repetition */
 /* } */
 .card {
-  @apply border-transparent shadow-xl bg-primary-bg xl:px-0 sm:px-8;
+  @apply border-transparent shadow-xl bg-white-bg xl:px-0 sm:px-8;
   animation-fill-mode: forwards; /* Holds the final state */
   transition: transform 0.3s ease-in-out;
 }
-
-.card:hover {
+.cardPost:hover {
+  animation: scale 0.3s linear forwards; /* Applies forward animation */
+}
+.cardHome:hover {
   animation: scaleRotate 0.3s linear forwards; /* Applies forward animation */
 }
 
-.card:not(:hover) {
+.cardHome:not(:hover) {
   animation: scaleRotateReverse 0.3s linear forwards; /* Reverse when unhovered */
 }
 .card .title {
-  @apply text-lg text-primary font-laobrige text-center;
+  @apply text-lg text-primary font-laobrige text-center text-base/8;
 }
 .card .content {
   @apply flex flex-col justify-center gap-5;
@@ -114,7 +115,7 @@ body {
   @apply text-lg mt-2 text-black/60 text-center;
 }
 .card .button {
-  @apply text-xl rounded-full p-2 font-bold bg-primary text-primary-bg;
+  @apply text-xl rounded-full p-4 font-bold bg-primary text-white-bg transition-colors hover:bg-primary/80;
 }
 
 /* Reset animation when button inside card is hovered */
@@ -122,12 +123,18 @@ body {
   animation: scaleRotate 0.3s linear forwards;
 } */
 
-.card:has(.button:hover),
-.card:hover:not(:hover) {
+.cardHome:has(.button:hover),
+.cardHome:hover:not(:hover) {
   /* animation: none; Stops animation when button is hovered
   transform: scale(1) rotate(0deg); /* Resets to original size & position */
   /* transition: transform 0.3s ease-in-out;  */
   animation: scaleRotateReverse 0.3s ease-out forwards;
+}
+.cardAnimation {
+  @apply hover:animate-[scale_0.3s_ease-in-out_forwards];
+}
+.cardAnimation:not(:hover) {
+  animation: scaleReverse 0.3s ease-out forwards;
 }
 .fadeIn {
   animation: fadeIn 0.5s forwards;
@@ -163,12 +170,20 @@ body {
     opacity: 1;
   }
 }
-@keyframes rotate {
+@keyframes scale {
   0% {
-    transform: rotate(0deg);
+    transform: scale(1);
   }
   100% {
-    transform: rotate(180deg);
+    transform: scale(1.05);
+  }
+}
+@keyframes scaleReverse {
+  0% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 @keyframes scaleRotate {
@@ -189,7 +204,32 @@ body {
 }
 .object-center {
   object-position: center;
-} /* Default */
+}
+
+.dropdown-content {
+  @apply flex flex-col gap-2 bg-primary-light border-none shadow-xl p-2;
+}
+
+.icon-button {
+  @apply !px-2 !py-5 bg-primary-light border-transparent shadow-xl border-4 hover:bg-white-bg transition-colors;
+}
+.icon-button .icon {
+  @apply -me-1 opacity-60 size-7;
+}
+.dropdown-item {
+  @apply hover:bg-pink-bg cursor-pointer;
+}
+.dropdown-item div {
+  @apply ml-2 flex gap-2 items-center text-lg font-semibold text-black/60;
+}
+.dropdown-item-icon {
+  @apply size-6 text-black/60;
+}
+/* Apply background color to trigger when DropdownMenu is open */
+[data-state="open"] > [data-slot="dropdown-menu-trigger"] {
+  background-color: var(--color-white-bg) !important;
+}
+/* Default */
 /* .sm\:object-left {
   object-position: left;
 } /* Left on small screens */

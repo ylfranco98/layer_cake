@@ -2,11 +2,11 @@ import { Header } from "@/components/Header/Header";
 import { SanityLive } from "@/sanity/lib/live";
 import {
   SidebarProvider,
-  SidebarTrigger,
-  useSidebar,
+  // SidebarTrigger,
+  // useSidebar,
 } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/Header/AppSidebar";
-import { MenuProvider } from "@/contexts/MenuContext";
+import { GlobalStateProvider } from "@/contexts/GlobalStateContext";
 import { MenuItem } from "@/lib/types";
 
 export default function FrontendLayout({
@@ -22,13 +22,13 @@ export default function FrontendLayout({
   ];
   return (
     <SidebarProvider defaultOpen={false}>
-      <section className="min-h-screen">
-        <MenuProvider>
+      <section className="min-h-screen w-full">
+        <GlobalStateProvider>
           <Header menuItems={menuItems} />
           {children}
           <SanityLive />
           <AppSidebar menuItems={menuItems} />
-        </MenuProvider>
+        </GlobalStateProvider>
       </section>
     </SidebarProvider>
   );

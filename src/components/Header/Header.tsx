@@ -18,7 +18,7 @@ import UserMenuItem from "./UserMenuItem";
 import CategoriesMenuItem from "./CategoriesMenuItem";
 import { LucideIcon, Menu } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
-import { useMenuItems } from "@/contexts/MenuContext";
+import { useGlobalState } from "@/contexts/GlobalStateContext";
 // import { useSidebar } from "@/contexts/SideBarContext";
 
 export function Header({
@@ -32,13 +32,13 @@ export function Header({
 }) {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const { active, setActiveMenuItem } = useMenuItems();
+  const { active, setActive } = useGlobalState();
   const { toggleSidebar } = useSidebar();
 
   useEffect(() => {
     const matchingItem = menuItems.find((item) => item.path === pathname);
     if (matchingItem) {
-      setActiveMenuItem(matchingItem.name);
+      setActive(matchingItem.name);
     }
   }, [pathname]);
 
@@ -57,8 +57,8 @@ export function Header({
     >
       <Link className="flex items-center gap-8" href="/">
         <Image
-          className="rounded-full shadow-2xl border-4 border-primary-border"
-          src="/bakepointlogo.png"
+          className="rounded-full shadow-2xl border-4 border-[#f4f3e6] bg-[#f4f3e6]"
+          src="/bakepointlogo.svg"
           alt="BakePoint logo"
           width="100"
           height="100"
@@ -66,15 +66,16 @@ export function Header({
         <h1 className="logo">BakePoint</h1>
       </Link>
       <NavigationMenu>
-        <NavigationMenuList
-          className={`items-center gap-8 ${scrolled ? "text-primary" : "text-black/60"} `}
-        >
+        <NavigationMenuList className={`items-center gap-8  `}>
           {menuItems.map((item) => (
-            <NavigationMenuItem key={item.name}>
+            <NavigationMenuItem
+              key={item.name}
+              // className={` ${scrolled ? "text-primary" : "text-black/60"} `}
+            >
               <Link
-                className={`menuItems menuItemsDisplay ${item.name === active ? "active" : ""}`}
+                className={`menuItems menuItemsDisplay  ${scrolled ? "scrolledItems" : ""}  ${item.name === active ? "active" : ""}`}
                 href={item.path}
-                onClick={(event) => setActiveMenuItem(item.name)}
+                onClick={(event) => setActive(item.name)}
               >
                 {item.name}
               </Link>

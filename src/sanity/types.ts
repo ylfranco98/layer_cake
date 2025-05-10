@@ -435,10 +435,11 @@ export type POST_QUERYResult = {
   } | null;
 } | null;
 // Variable: CATEGORIES_QUERY
-// Query: *[_type == "category"&& defined(slug.current)]|order(title asc){title,description}
+// Query: *[_type == "category"&& defined(slug.current)]|order(title asc){title,description,icon}
 export type CATEGORIES_QUERYResult = Array<{
   title: string | null;
   description: string | null;
+  icon: string | null;
 }>;
 
 // Query TypeMap
@@ -448,6 +449,6 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug.current)]|order(publishedAt desc){\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POST_QUERYResult;
-    "*[_type == \"category\"&& defined(slug.current)]|order(title asc){title,description}\n": CATEGORIES_QUERYResult;
+    "*[_type == \"category\"&& defined(slug.current)]|order(title asc){title,description,icon}\n": CATEGORIES_QUERYResult;
   }
 }
