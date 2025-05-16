@@ -17,7 +17,7 @@ const TooltipComponent = ({
     <TooltipProvider delayDuration={0}>
       <Tooltip>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
-        <TooltipContent className="dark p-2 text-md bg-primary-light font-semibold text-black/60">
+        <TooltipContent className="dark p-2 bg-primary-light default-md">
           {text}
         </TooltipContent>
       </Tooltip>

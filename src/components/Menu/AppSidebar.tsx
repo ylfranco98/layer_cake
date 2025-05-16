@@ -23,7 +23,7 @@ import {
 import { CloseIcon } from "@sanity/icons";
 import Link from "next/link";
 import { useGlobalState } from "@/contexts/GlobalStateContext";
-import CategoriesMenuItem from "@/components/Header/CategoriesMenuItem";
+import CategoriesMenuItem from "@/components/Menu/CategoriesMenuItem";
 import UserMenuItem from "./UserMenuItem";
 import {
   LucideIcon,
@@ -48,7 +48,7 @@ export function AppSidebar({ menuItems }: { menuItems: MenuItem[] }) {
   return (
     <>
       <div
-        className={`w-full h-full bg-black/60 backdrop-blur ${open ? "fixed" : "hidden"} top-0 left-0 z-50 xl:hidden`}
+        className={`w-full h-full bg-text backdrop-blur ${open ? "fixed" : "hidden"} top-0 left-0 z-50 xl:hidden`}
       >
         {" "}
       </div>
@@ -62,7 +62,7 @@ export function AppSidebar({ menuItems }: { menuItems: MenuItem[] }) {
             <SidebarGroup>
               <SidebarGroupContent>
                 <CloseIcon
-                  className="fixed right-0 mt-8 mr-8 size-8 text-black/60 hover:text-black  z-100"
+                  className="fixed right-0 mt-8 mr-8 size-8 text-text hover:text-black  z-100"
                   onClick={(event) => {
                     toggleSidebar();
                     console.log(open);

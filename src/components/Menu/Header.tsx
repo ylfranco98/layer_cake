@@ -70,7 +70,7 @@ export function Header({
           {menuItems.map((item) => (
             <NavigationMenuItem
               key={item.name}
-              // className={` ${scrolled ? "text-primary" : "text-black/60"} `}
+              // className={` ${scrolled ? "text-primary" : "text-text"} `}
             >
               <Link
                 className={`menuItems menuItemsDisplay  ${scrolled ? "scrolledItems" : ""}  ${item.name === active ? "active" : ""}`}

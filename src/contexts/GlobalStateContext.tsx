@@ -19,6 +19,8 @@ interface GlobalState {
   setFavoriteRecipes: React.Dispatch<React.SetStateAction<any[]>>;
   active: string;
   setActive: React.Dispatch<React.SetStateAction<string>>;
+  order: string;
+  setOrder: React.Dispatch<React.SetStateAction<string>>;
 }
 const GlobalStateContext = createContext<GlobalState | null>({
   categories: [],
@@ -28,6 +30,8 @@ const GlobalStateContext = createContext<GlobalState | null>({
   setFavoriteRecipes: () => {},
   active: "Home",
   setActive: () => {},
+  order: "PublishedAt",
+  setOrder: () => {},
 });
 
 export const GlobalStateProvider: React.FC<Props> = ({ children }) => {
@@ -35,6 +39,7 @@ export const GlobalStateProvider: React.FC<Props> = ({ children }) => {
   const [favoritePosts, setFavoritePosts] = useState<any[]>([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState<any[]>([]);
   const [active, setActive] = useState("Home");
+  const [order, setOrder] = useState("PublishedAt");
 
   // Fetch categories dynamically
   useEffect(() => {
@@ -57,6 +62,8 @@ export const GlobalStateProvider: React.FC<Props> = ({ children }) => {
         setFavoriteRecipes,
         active,
         setActive,
+        order,
+        setOrder,
       }}
     >
       {children}

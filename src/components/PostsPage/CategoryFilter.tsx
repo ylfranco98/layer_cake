@@ -117,9 +117,7 @@ const CategoryFilter = () => {
             //   hideClearAllButton
             hidePlaceholderWhenSelected
             emptyIndicator={
-              <p className="text-center text-sm text-black/60">
-                No results found
-              </p>
+              <p className="text-center text-sm text-text">No results found</p>
             }
           />
         }
