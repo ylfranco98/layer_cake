@@ -1,7 +1,18 @@
 import { defineQuery } from "next-sanity";
 
-export const POSTS_QUERY =
-  defineQuery(`*[_type == "post" && defined(slug.current)]|order(publishedAt desc){
+export const definePostQuery = ({
+  search,
+  order,
+  orderDirection,
+  categoriesFilter,
+}: {
+  search: string;
+  order: string;
+  orderDirection: string;
+  categoriesFilter: string[];
+}) => {
+  // && defined($categoriesFilter) && select(defined($categoriesFilter) => $categoriesFilter in categories[]->slug.current,true)
+  const query = `*[_type == "post" && defined(slug.current) ${search ? "&& (!defined($search) || title match $search || publishedAt match $search || author->name match $search)" : ""}  ${categoriesFilter.length > 0 ? "&& count((categories[]->slug.current)[@ in $categoriesFilter]) > 0" : ""}] | order(${order} ${orderDirection}){
   _id,
   title,
   slug,
@@ -20,8 +31,10 @@ export const POSTS_QUERY =
     name,
     image
   }
-}`);
-
+}`;
+  console.log(categoriesFilter);
+  return defineQuery(query);
+};
 export const POSTS_SLUGS_QUERY =
   defineQuery(`*[_type == "post" && defined(slug.current)]{ 
   "slug": slug.current
@@ -47,3 +60,7 @@ export const POST_QUERY =
     image
   }
 }`);
+
+export const CATEGORIES_QUERY =
+  defineQuery(`*[_type == "category"&& defined(slug.current)]|order(title asc){slug,title,description,icon}
+`);
