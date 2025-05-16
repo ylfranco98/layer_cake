@@ -47,3 +47,7 @@ export const POST_QUERY =
     image
   }
 }`);
+
+export const CATEGORIES_QUERY =
+  defineQuery(`*[_type == "category"&& defined(slug.current)]|order(title asc){title,description,icon}
+`);
