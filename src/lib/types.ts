@@ -14,6 +14,7 @@ export type CollapsibleMenuType = {
 };
 
 export type Category = {
+  slug: { current: string };
   title: string;
   description: string;
   icon: string;

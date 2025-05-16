@@ -21,6 +21,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import TooltipComponent from "../TooltipComponent";
+import { useRouter, useSearchParams } from "next/navigation";
+import { title } from "node:process";
 
 type Checked = DropdownMenuItemProps[];
 
@@ -29,17 +31,48 @@ const CategoryFilterCheck = () => {
     Record<string, boolean>
   >({});
   const { categories } = useGlobalState();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const order = searchParams.get("order") || "publishedAt"; // Preserve current order
+  const orderDirection = searchParams.get("orderDirection") || "desc";
+  const query = searchParams.get("query") || "";
+
+  const [categoriesFilter, setCategoriesFilter] = useState<string[]>(
+    searchParams.get("categoriesFilter")?.split(",") || []
+  );
   useEffect(() => {
     // Initialize checkboxes to "false"
     const initialState = categories.reduce(
       (acc, category) => {
-        acc[category.title] = false; // Default unchecked
+        acc[category.slug.current] = false; // Default unchecked
         return acc;
       },
       {} as Record<string, boolean>
     );
     setSelectedCategories(initialState);
   }, [categories]);
+
+  const updateQuery = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("query", query); // ✅ Update query
+    params.set("order", order); // ✅ Keep current order
+    params.set("orderDirection", orderDirection);
+    params.set("categoriesFilter", categoriesFilter.join(","));
+
+    router.push(`?${params.toString()}`, { scroll: false }); // ✅ Update URL without reset
+  };
+
+  useEffect(() => {
+    updateQuery();
+  }, [categoriesFilter]);
+
+  useEffect(() => {
+    const result = Object.entries(selectedCategories)
+      .filter(([key, value]) => value)
+      .map(([key]) => key);
+    setCategoriesFilter(result);
+  }, [selectedCategories]);
 
   return (
     <DropdownMenu>
@@ -56,13 +89,13 @@ const CategoryFilterCheck = () => {
             <DropdownMenuCheckboxItem
               className="dropdown-item"
               key={category.title}
-              checked={selectedCategories[category.title]}
-              onCheckedChange={(checked: boolean) =>
+              checked={selectedCategories[category.slug.current]}
+              onCheckedChange={(checked: boolean) => {
                 setSelectedCategories((prev) => ({
                   ...prev,
-                  [category.title]: checked,
-                }))
-              }
+                  [category.slug.current]: checked,
+                }));
+              }}
             >
               <div className="">
                 {category.icon &&

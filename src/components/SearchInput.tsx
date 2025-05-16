@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter, useSearchParams } from "next/navigation";
 import { useId } from "react";
 import { ArrowRightIcon, SearchIcon, XIcon } from "lucide-react";
 import Form from "next/form";
@@ -9,15 +10,42 @@ import Link from "next/link";
 
 export const SearchInput = ({ query }: { query?: string }) => {
   const id = useId();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const order = searchParams.get("order") || "publishedAt"; // Preserve current order
+  const orderDirection = searchParams.get("orderDirection") || "desc";
+  const updateQuery = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevent default submission behavior
+
+    const formData = new FormData(event.currentTarget);
+    const newQuery = formData.get("query") as string;
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("query", newQuery); // ✅ Update query
+    params.set("order", order); // ✅ Keep current order
+    params.set("orderDirection", orderDirection);
+
+    router.push(`?${params.toString()}`, { scroll: false }); // ✅ Update URL without reset
+  };
   const reset = () => {
-    const form = document.querySelector(".search-form") as HTMLFormElement;
-    console.log(form);
-    if (form) form.reset();
+    // const form = document.querySelector(".search-form") as HTMLFormElement;
+    // console.log(form);
+    // if (form) form.reset();
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("query", ""); // ✅ Update query
+    params.set("order", order);
+    params.set("orderDirection", orderDirection);
+    router.push(`?${params.toString()}`, { scroll: false });
   };
   return (
     <div className="*:not-first:mt-2 ">
       {/* w-1/2 pr-6 */}
-      <Form action="/posts" className="relative search-form">
+      <Form
+        action="/posts"
+        className="relative search-form"
+        onSubmit={updateQuery}
+      >
         <Input
           id={id}
           name="query"
@@ -27,9 +55,9 @@ export const SearchInput = ({ query }: { query?: string }) => {
           type="search"
         />
 
-        <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
+        <button className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
           <SearchIcon size={16} className="text-text" />
-        </div>
+        </button>
         {query && (
           <button
             type="reset"
