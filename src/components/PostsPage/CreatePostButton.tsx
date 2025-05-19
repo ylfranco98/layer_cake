@@ -1,16 +1,17 @@
 import React from "react";
-import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
+import Link from "next/link";
 
 const CreatePostButton = () => {
   return (
-    <Button
-      variant="outline"
-      className="icon-button default-text font-font text-base !text-text"
+    <Link
+      // variant="outline"
+      className="icon-button default-text font-font text-base !text-text flex gap-3 !py-2 rounded-md"
+      href="/posts/create"
     >
       Create New Post
       <Plus className="icon" size={16} aria-hidden="true" />
-    </Button>
+    </Link>
   );
 };
 
