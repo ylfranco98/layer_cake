@@ -29,9 +29,6 @@ export const SearchInput = ({ query }: { query?: string }) => {
     router.push(`?${params.toString()}`, { scroll: false }); // ✅ Update URL without reset
   };
   const reset = () => {
-    // const form = document.querySelector(".search-form") as HTMLFormElement;
-    // console.log(form);
-    // if (form) form.reset();
     const params = new URLSearchParams(searchParams.toString());
     params.set("query", ""); // ✅ Update query
     params.set("order", order);

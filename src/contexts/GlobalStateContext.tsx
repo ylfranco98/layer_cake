@@ -49,7 +49,6 @@ export const GlobalStateProvider: React.FC<Props> = ({ children }) => {
       setCategories(data);
     };
     fetchCategories();
-    console.log("fetching");
   }, []);
 
   return (

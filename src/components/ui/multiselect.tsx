@@ -431,7 +431,7 @@ const MultipleSelector = ({
     >
       <div
         className={cn(
-          "border-input focus-within:border-ring focus-within:ring-primary-light has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive relative min-h-[38px] rounded-md border-none text-sm transition-[color,box-shadow] outline-none focus-within:ring-2 has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50 bg-white-bg shadow-xl",
+          "border-input focus-within:border-ring focus-within:ring-primary has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive relative min-h-[38px] rounded-md border-none text-sm transition-[color,box-shadow] outline-none focus-within:ring-2 has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50 bg-white-bg shadow-xl",
           {
             "p-1": selected.length !== 0,
             "cursor-text": !disabled && selected.length !== 0,
@@ -444,7 +444,7 @@ const MultipleSelector = ({
           inputRef?.current?.focus();
         }}
       >
-        <div className="flex flex-wrap gap-1 p-2 ">
+        <div className="flex flex-wrap gap-1 p-1 ">
           {selected.map((option) => {
             return (
               <div
@@ -537,7 +537,7 @@ const MultipleSelector = ({
       <div className="relative">
         <div
           className={cn(
-            "border-input absolute top-2 z-1 w-full overflow-hidden rounded-md border-none bg-primary-light shadow-xl",
+            "border-input absolute top-2 z-1 w-full overflow-hidden rounded-md border-none bg-white-bg shadow-xl font-font text-text",
             "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
             !open && "hidden"
           )}

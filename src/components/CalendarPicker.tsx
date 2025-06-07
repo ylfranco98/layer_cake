@@ -99,7 +99,6 @@ export default function CalendarPicker() {
     } else {
       setDate(undefined);
     }
-    console.log(new Date(value).toISOString());
   };
   const handleInputEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -130,7 +129,7 @@ export default function CalendarPicker() {
             </Button>
           </PopoverTrigger>
         </TooltipComponent>
-        <PopoverContent className="w-fit pink-container !z-1">
+        <PopoverContent className="w-fit pink-container !z-200">
           {/* <div className="rounded-md border"> */}
           <div className="flex max-sm:flex-col">
             <div className="relative py-4 max-sm:order-1 max-sm:border-t sm:w-32">
