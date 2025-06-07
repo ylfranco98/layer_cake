@@ -46,13 +46,13 @@ export const createPost = async (state: any, form: PostForm) => {
         _type: slug,
         current: slug,
       },
-      mainImage: {
-        _type: "image",
-        asset: {
-          // _ref: imageId, // Reference uploaded image
-        },
-        alt: "Sample Image Alternative Text",
-      },
+      // mainImage: {
+      //   _type: "image",
+      //   asset: {
+      //     // _ref: imageId, // Reference uploaded image
+      //   },
+      //   alt: "Sample Image Alternative Text",
+      // },
       author: {
         _type: "reference",
         _ref: "c9c13a36-ea84-479e-bec5-419606735165",
