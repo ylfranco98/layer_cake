@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { Plus } from "lucide-react";
 import Link from "next/link";
@@ -13,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import NewPostForm from "../NewPostForm";
+// import NewPostForm from "../NewPostForm";
 
 const CreatePostButton = () => {
   return (
@@ -28,10 +27,7 @@ const CreatePostButton = () => {
           <Plus className="icon" size={16} aria-hidden="true" />
         </Button>
       </DialogTrigger>
-      <DialogContent
-        className=" flex !w-full pink-container !max-w-full !max-h-full !p-0 !m-0 !border-none !rounded-lg fadeIn animatePopIn"
-        onClick={(event) => event.stopPropagation()}
-      >
+      <DialogContent className=" flex !w-full pink-container !max-w-full !max-h-full !p-0 !m-0 !border-none !rounded-lg fadeIn animatePopIn">
         {/* overflow-y-visible sm:max-w-lg*/}
 
         <img
@@ -51,8 +47,8 @@ const CreatePostButton = () => {
             Make changes to your profile here. You can change your photo and set
             a username.
           </DialogDescription>
-          <NewPostForm />
-          {/* <DialogFooter className="px-6 py-4">
+          {/* <NewPostForm /> */}
+          <DialogFooter className="px-6 py-4">
             <DialogClose asChild>
               <Button type="button" variant="outline">
                 Cancel
@@ -61,7 +57,7 @@ const CreatePostButton = () => {
             <DialogClose asChild>
               <Button type="button">Save changes</Button>
             </DialogClose>
-          </DialogFooter> */}
+          </DialogFooter>
         </div>
       </DialogContent>
     </Dialog>

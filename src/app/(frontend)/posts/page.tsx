@@ -60,7 +60,6 @@ export default async function Page({
   });
   let animationTime = 0;
 
-  // console.log(posts);
   return (
     <section className="mt-[250px] mx-[10%] p-0 ">
       <div className="grid grid-flow-row grid-cols-1 lg:grid-cols-2 gap-8">

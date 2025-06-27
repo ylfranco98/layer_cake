@@ -65,7 +65,6 @@ export function AppSidebar({ menuItems }: { menuItems: MenuItem[] }) {
                   className="fixed right-0 mt-8 mr-8 size-8 text-text hover:text-black  z-100"
                   onClick={(event) => {
                     toggleSidebar();
-                    console.log(open);
                   }}
                 />
                 <SidebarMenu className="sidebarMenu">

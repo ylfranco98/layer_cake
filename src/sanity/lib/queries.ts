@@ -32,7 +32,6 @@ export const definePostQuery = ({
     image
   }
 }`;
-  console.log(categoriesFilter);
   return defineQuery(query);
 };
 export const POSTS_SLUGS_QUERY =
@@ -62,5 +61,5 @@ export const POST_QUERY =
 }`);
 
 export const CATEGORIES_QUERY =
-  defineQuery(`*[_type == "category"&& defined(slug.current)]|order(title asc){slug,title,description,icon}
+  defineQuery(`*[_type == "category"&& defined(slug.current)]|order(title asc){_id,slug,title,description,icon}
 `);
